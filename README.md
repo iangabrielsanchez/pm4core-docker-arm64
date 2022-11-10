@@ -68,7 +68,7 @@ This allows for smaller images and better performance than using dind (docker in
 See [this post](http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/) for more info.
 The host socket file is usually at /var/run/docker.sock but can be changed in the .env file
 
-## Running on Apple Silicon
+## Running on Apple Silicon or ARM64
 
 Since processmaker doesn't have arm64 builds yet, it is necessary to build everything locally to have an arm64 image.
 
