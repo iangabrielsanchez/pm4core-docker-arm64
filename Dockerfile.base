@@ -11,7 +11,7 @@ nginx vim curl unzip wget supervisor cron mysql-client build-essential
 #
 # node
 #
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt -y install nodejs
 
 #
@@ -30,8 +30,8 @@ RUN chmod 0644 /etc/cron.d/laravel-cron && crontab /etc/cron.d/laravel-cron
 #
 # docker client
 #
-ENV DOCKERVERSION=20.10.5
-RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
+ENV DOCKERVERSION=20.10.10
+RUN curl -fsSLO https://download.docker.com/linux/static/stable/aarch64/docker-${DOCKERVERSION}.tgz \
   && tar xzvf docker-${DOCKERVERSION}.tgz --strip 1 \
                  -C /usr/local/bin docker/docker \
   && rm docker-${DOCKERVERSION}.tgz

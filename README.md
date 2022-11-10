@@ -68,18 +68,24 @@ This allows for smaller images and better performance than using dind (docker in
 See [this post](http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/) for more info.
 The host socket file is usually at /var/run/docker.sock but can be changed in the .env file
 
-## Todo
+## Running on Apple Silicon
 
-### Automated builds pushed to dockerhub
+Since processmaker doesn't have arm64 builds yet, it is necessary to build everything locally to have an arm64 image.
 
-Currently, the image must be built and pushed to dockerhub manually using the
-[instructions above](#building-the-application-image-locally) when a new tag of PM4
-is released.
+Build the base image locally first
+```
+docker build --platform linux/arm64 -t pm4-base:local -f Dockerfile.base .
+```
 
-The goal is to have CircleCI do this automatically
+Then build the Dockerfile
+```
+docker build --platform linux/arm64 --build-arg PM_VERSION=4.2.35 -t processmaker/pm4-core:local .
+```
 
+Notice that the PM_VERSION should be at least 4.2.35 because it is the closest version from 4.1.21 that uses `openapitools/openapi-generator-cli@5.1.1` which supports arm64 architecture.
 
-### Use production build
+After building the two Dockerfiles, you can now run the compose file normally.
 
-Currently the image is built using development as the target (e.g. `npm run dev`). Building for production for Node and Composer packages
-should greatly reduce the image size and might increase performance.
+```
+docker-compose up -d;
+```

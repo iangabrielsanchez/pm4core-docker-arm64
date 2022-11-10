@@ -1,4 +1,4 @@
-FROM processmaker/pm4-base:1.0.0
+FROM pm4-base:local
 
 ARG PM_VERSION
 
@@ -13,4 +13,8 @@ RUN npm install --unsafe-perm=true && npm run dev
 
 COPY build-files/laravel-echo-server.json .
 COPY build-files/init.sh .
+
+# Prevents https://github.com/ProcessMaker/processmaker/issues/4454 from happening
+RUN echo "echo \"SESSION_DOMAIN=\" >> .env" >> init.sh
+
 CMD bash init.sh && supervisord --nodaemon
