@@ -79,10 +79,8 @@ docker build --platform linux/arm64 -t pm4-base:local -f Dockerfile.base .
 
 Then build the Dockerfile
 ```
-docker build --platform linux/arm64 --build-arg PM_VERSION=4.2.35 -t processmaker/pm4-core:local .
+docker build --platform linux/arm64  -t processmaker/pm4-core:local .
 ```
-
-Notice that the PM_VERSION should be at least 4.2.35 because it is the closest version from 4.1.21 that uses `openapitools/openapi-generator-cli@5.1.1` which supports arm64 architecture.
 
 After building the two Dockerfiles, you can now run the compose file normally.
 

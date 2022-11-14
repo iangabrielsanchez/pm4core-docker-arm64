@@ -23,6 +23,7 @@ services:
   redis:
     platform: linux/arm64
     image: redis
+    restart: unless-stopped
   mysql:
     platform: linux/arm64
     image: biarms/mysql:5.7.30

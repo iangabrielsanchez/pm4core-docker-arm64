@@ -1,10 +1,9 @@
 FROM pm4-base:local
 
-ARG PM_VERSION
-
 WORKDIR /tmp
-RUN wget https://github.com/ProcessMaker/processmaker/archive/refs/tags/v${PM_VERSION}.zip
-RUN unzip v${PM_VERSION}.zip && rm -rf /code/pm4 && mv processmaker-${PM_VERSION} /code/pm4
+
+RUN wget https://github.com/iangabrielsanchez/processmaker/archive/refs/tags/v4.1.21-arm64.zip
+RUN unzip v4.1.21-arm64.zip && rm -rf /code/pm4 && mv processmaker-4.1.21-arm64 /code/pm4
 
 WORKDIR /code/pm4
 RUN composer install
